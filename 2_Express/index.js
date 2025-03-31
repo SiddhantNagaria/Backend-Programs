@@ -39,6 +39,13 @@ app.get('*', (req, res) => {
   res.send("Page not found");
 });
 
+
+//Path Parameters
+app.get("/:username/:id", (req, res) => {
+    let {username, id} = req.params;
+    res.send(`Hello ${username} with id ${id}`);
+});
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });
