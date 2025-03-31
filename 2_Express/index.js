@@ -8,15 +8,35 @@ const port = 3000;
 
 //handling requests
 
-app.use((req, res) => {
-  //sending object
+// app.use((req, res) => {
+  //sending object as response
 
   // res.send({
   //     message: 'Hello World!',
   //     status: 200
   // });
-  let list = "<h1>List of something</h1><br/><li>Hi something</li>";
-  res.send(list);
+//   let list = "<h1>List of something</h1><br/><li>Hi something</li>";
+//   res.send(list);
+// });
+
+
+//ROUTING
+
+app.get('/', (req, res) => {
+    res.send("Home Page");
+});
+
+app.get('/hello', (req, res) => {
+  res.send({
+      message: 'Hello World!',
+      status: 200
+  })
+});
+
+
+//wildcard route
+app.get('*', (req, res) => {
+  res.send("Page not found");
 });
 
 app.listen(port, () => {
