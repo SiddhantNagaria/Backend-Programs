@@ -13,7 +13,6 @@ app.get("/hello", (req, res) => {
   res.send("Hello World!");
 });
 
-
 //EJS
 
 app.get("/rolldice", (req, res) => {
@@ -23,12 +22,17 @@ app.get("/rolldice", (req, res) => {
   res.render("rolldice.ejs", { num: diceVal });
 });
 
-
-app.get("/ig/:username", (req,res)=>{
+app.get("/ig/:username", (req, res) => {
   const followers = ["adam", "bob", "steve"];
-  let {username} = req.params;
-  res.render("ig.ejs", {username, followers});
-})
+  let { username } = req.params;
+  const instaData = require("./data.json");
+  const data = instaData[username];
+  if (data) {
+    res.render("ig.ejs", { followers, data });
+  } else {
+    res.render("error.ejs");
+  }
+});
 
 app.listen(port, (req, res) => {
   console.log(`server listening on port ${port}`);
