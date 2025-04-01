@@ -13,12 +13,21 @@ app.get("/hello", (req, res) => {
   res.send("Hello World!");
 });
 
+
+//EJS
+
 app.get("/rolldice", (req, res) => {
   //assume this value coming from a database
   // which is sent to ejs file as object
   let diceVal = Math.floor(Math.random() * 6) + 1;
   res.render("rolldice.ejs", { num: diceVal });
 });
+
+
+app.get("/ig/:username", (req,res)=>{
+  let {username} = req.params;
+  res.render("ig.ejs", {username});
+})
 
 app.listen(port, (req, res) => {
   console.log(`server listening on port ${port}`);
