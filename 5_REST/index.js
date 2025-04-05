@@ -11,10 +11,12 @@ app.use(express.static(path.join(__dirname, "./public")));
 
 let posts = [
     {
+        id: "1",
         username: "siddhant",
         content: "I do coding",
     },
     {
+        id: "2",
         username: "rahul",
         content: "I do video editing",
     },
@@ -33,6 +35,12 @@ app.post("/posts", (req, res) => {
     posts.push({ username, content }); //push as object
     res.redirect("/posts");
 })
+
+app.get("/posts/:id", (req, res) => {
+    let {id} = req.params;
+    let post = posts.find((p)=> id === p.id);
+    res.render("show.ejs", {post});
+});
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
