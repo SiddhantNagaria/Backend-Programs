@@ -30,7 +30,7 @@ app.get("/posts", (req, res) => {
 });
 
 //create route
-app.get("/posts/new", (req,res)=>{
+app.get("/posts/new", (req, res) => {
     res.render("new.ejs");
 })
 
@@ -43,9 +43,19 @@ app.post("/posts", (req, res) => {
 
 //show route
 app.get("/posts/:id", (req, res) => {
-    let {id} = req.params;
-    let post = posts.find((p)=> id === p.id);
-    res.render("show.ejs", {post});
+    let { id } = req.params;
+    let post = posts.find((p) => id === p.id);
+    res.render("show.ejs", { post });
+});
+
+//update route
+app.patch("/posts/:id", (req, res) => {
+    let { id } = req.params;
+    let newContent = req.body.content;
+    let post = posts.find((p) => id === p.id);
+    post.content = newContent;
+    console.log(post);
+    res.send("patch working");
 });
 
 app.listen(port, () => {
