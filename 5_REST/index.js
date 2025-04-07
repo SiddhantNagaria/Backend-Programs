@@ -67,6 +67,15 @@ app.get("/posts/:id/edit", (req, res) => {
     res.render("edit.ejs", { post });
 });
 
+
+//delete route
+app.delete("/posts/:id",(req,res)=>{
+    let {id} = req.params;
+    posts = posts.filter((p) => id !== p.id);
+    res.redirect("/posts");
+
+})
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });

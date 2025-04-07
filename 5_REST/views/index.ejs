@@ -18,12 +18,15 @@
             <!-- <a href="http://localhost:3000/posts/<%= post.id %>">See Post</a> -->
             <a href="/posts/<%= post.id %>/edit">Edit Post</a>
             <!-- <a href="http://localhost:3000/posts/<%= post.id %>/edit">Edit Post</a> -->
+            <form method="post" action="/posts/<%= post.id %>?_method=DELETE">
+                <button>Delete post</button>
+            </form>
         </div>
         <% } %>
-        <br> <br>
-        <a href="/posts/new">Create New Post</a>
-        <br>
-        <!-- <a href="posts/new">Create New Post</a> -->
+            <br> <br>
+            <a href="/posts/new">Create New Post</a>
+            <br>
+            <!-- <a href="posts/new">Create New Post</a> -->
 </body>
 
 </html>
