@@ -9,21 +9,44 @@ const connection = mysql.createConnection({
     password: "sknagaria",
 });
 
-let q1 = "show tables";
+let getRandomUser = () => {
+    // return {     //return an object with key-value pair
+    //     userId: faker.string.uuid(),
+    //     username: faker.internet.username(),
+    //     email: faker.internet.email(),
+    //     password: faker.internet.password(),
+    // };
+    return [ // return array
+        faker.string.uuid(),
+        faker.internet.username(),
+        faker.internet.email(),
+        faker.internet.password(),
+    ];
+};
+
+let data = [];
+
+for (let i = 0; i < 100; i++) {
+    data.push(getRandomUser());
+}
+
+// let q1 = "show tables";
 
 
 //inserting new data manually
 
-let q2 = "insert into users (id, username, email, password) values (?,?,?,?)";
+// let q2 = "insert into users (id, username, email, password) values (?,?,?,?)";
 let q3 = "insert into users (id, username, email, password) values ?";
-let userdata = [
-    ["123", "siddhant", "siddhant@abc.com", "siddhant"],
-    ["456", "rahul", "rahul@abc.com", "rahul"],
-    ["789", "sachin", "sachin@abc.com", "sachin"],
-];
+// let userdata = [
+//     ["123", "siddhant", "siddhant@abc.com", "siddhant"],
+//     ["456", "rahul", "rahul@abc.com", "rahul"],
+//     ["789", "sachin", "sachin@abc.com", "sachin"],
+// ];
+
+
 
 try {
-    connection.query(q3, [userdata], (err, res) => {
+    connection.query(q3, [data], (err, res) => {
         if (err) throw err;
         console.log(res);
         // console.log(res.length);
@@ -35,14 +58,5 @@ try {
 }
 
 connection.end();
-
-let getRandomUser = () => {
-    return {
-        userId: faker.string.uuid(),
-        username: faker.internet.username(),
-        email: faker.internet.email(),
-        password: faker.internet.password(),
-    };
-};
 
 // console.log(getRandomUser());
