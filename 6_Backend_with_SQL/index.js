@@ -9,19 +9,30 @@ const connection = mysql.createConnection({
     password: "sknagaria",
 });
 
-let q = "show tables";
+let q1 = "show tables";
+
+
+//inserting new data manually
+
+let q2 = "insert into users (id, username, email, password) values (?,?,?,?)";
+let q3 = "insert into users (id, username, email, password) values ?";
+let userdata = [
+    ["123", "siddhant", "siddhant@abc.com", "siddhant"],
+    ["456", "rahul", "rahul@abc.com", "rahul"],
+    ["789", "sachin", "sachin@abc.com", "sachin"],
+];
 
 try {
-    connection.query(q, (err, res) => {
+    connection.query(q3, [userdata], (err, res) => {
         if (err) throw err;
         console.log(res);
-        console.log(res.length);
-        console.log(res[0]);
-        console.log(res[1]);
+        // console.log(res.length);
+        // console.log(res[0]);
+        // console.log(res[1]);
     });
 } catch (err) {
     console.log(err);
-};
+}
 
 connection.end();
 
