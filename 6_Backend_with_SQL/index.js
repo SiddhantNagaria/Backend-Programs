@@ -9,10 +9,15 @@ const connection = mysql.createConnection({
     password: "sknagaria",
 });
 
+let q = "show tables";
+
 try {
-    connection.query("SHOW TABLES", (err, res) => {
+    connection.query(q, (err, res) => {
         if (err) throw err;
         console.log(res);
+        console.log(res.length);
+        console.log(res[0]);
+        console.log(res[1]);
     });
 } catch (err) {
     console.log(err);
