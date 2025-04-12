@@ -72,7 +72,7 @@ app.get("/", (req, res) => {
     try {
         connection.query(q, (err, result) => {
             if (err) throw err;
-            let count = result[0]["count(*)"];
+            let count = result[0]["count(*)"];  //"count(*)" = key
             res.render("home.ejs", { count });
         });
     } catch (err) {
