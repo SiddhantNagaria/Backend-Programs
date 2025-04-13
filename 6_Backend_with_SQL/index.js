@@ -67,6 +67,8 @@ let q3 = "insert into users (id, username, email, password) values ?";
 
 // console.log(getRandomUser());
 
+
+//home page
 app.get("/", (req, res) => {
     let q = `select count(*) from users`;
     try {
@@ -75,6 +77,22 @@ app.get("/", (req, res) => {
             let count = result[0]["count(*)"];  //"count(*)" = key
             res.render("home.ejs", { count });
         });
+    } catch (err) {
+        res.send("some error occured");
+        console.log(err);
+    }
+});
+
+
+//show user route
+app.get("/users", (req, res) => {
+    let q = `select * from users`;
+    try {
+        connection.query(q, (err, result) => {
+            if (err) throw err;
+            let users = result;
+            res.render("users.ejs", { users });
+        })
     } catch (err) {
         res.send("some error occured");
         console.log(err);
