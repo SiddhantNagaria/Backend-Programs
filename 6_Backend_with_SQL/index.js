@@ -5,9 +5,13 @@ const app = express();
 const uuid = require("uuid");
 const port = 3000;
 const path = require("path");
+const methodOverride = require("method-override");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "./views"));
+
+app.use(methodOverride("_method"));
+app.use(express.urlencoded({ extended: true }));
 
 // Create the connection to database
 const connection = mysql.createConnection({
@@ -91,7 +95,24 @@ app.get("/users", (req, res) => {
         connection.query(q, (err, result) => {
             if (err) throw err;
             let users = result;
-            res.render("users.ejs", { users });
+            res.render("showUsers.ejs", { users });
+        })
+    } catch (err) {
+        res.send("some error occured");
+        console.log(err);
+    }
+});
+
+//edit route
+app.get("/users/:id/edit", (req, res) => {
+    let {id} = req.params;
+    let q = `select * from users where id = '${id}'`;
+    try {
+        connection.query(q, (err, result) => {
+            if (err) throw err;
+            let user = result[0];
+            console.log(result);
+            res.render("edit.ejs", { user });
         })
     } catch (err) {
         res.send("some error occured");

@@ -21,6 +21,7 @@
             <th>Id</th>
             <th>Name</th>
             <th>Email</th>
+            <th>Edit</th>
         </tr>
         <% for(let user of users){ %>
             <tr>
@@ -32,6 +33,11 @@
                 </td>
                 <td>
                     <%= user.email %>
+                </td>
+                <td>
+                <form action="/users/<%= user.id %>/edit">
+                    <button>Edit Username</button>
+                </form>
                 </td>
             </tr>
             <% } %>
