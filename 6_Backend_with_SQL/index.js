@@ -105,7 +105,7 @@ app.get("/users", (req, res) => {
 
 //edit route
 app.get("/users/:id/edit", (req, res) => {
-    let {id} = req.params;
+    let { id } = req.params;
     let q = `select * from users where id = '${id}'`;
     try {
         connection.query(q, (err, result) => {
@@ -119,6 +119,32 @@ app.get("/users/:id/edit", (req, res) => {
         console.log(err);
     }
 });
+
+//update route
+app.patch("/users/:id", (req, res) => {
+    let { id } = req.params;
+    let q = `select * from users where id = '${id}'`;
+    let {username: newUsername, password : formPass} = req.body;
+    try {
+        connection.query(q, (err, result) => {
+            if (err) throw err;
+            let user = result[0];
+            if(formPass!=user.password){
+                res.send("incorrect password");
+            }else{
+                let q2 = `update users set username = '${newUsername}' where id = '${id}'`;
+                connection.query(q2, (err, result) => {
+                    if (err) throw err;
+                    res.redirect("/users");
+                });
+            }
+        });
+    } catch (err) {
+        res.send("some error occured");
+        console.log(err);
+    }
+});
+
 
 app.listen(port, (req, res) => {
     console.log(`server is listening to port ${port}`);
