@@ -2,7 +2,7 @@ const { faker } = require("@faker-js/faker");
 const mysql = require("mysql2"); //get client
 const express = require("express");
 const app = express();
-const uuid = require("uuid");
+const {v4:uuidv4} = require("uuid");
 const port = 3000;
 const path = require("path");
 const methodOverride = require("method-override");
@@ -145,6 +145,27 @@ app.patch("/users/:id", (req, res) => {
     }
 });
 
+
+//add new user 
+app.get("/users/new", (req,res)=>{
+    res.render("new.ejs");
+})
+
+app.post("/users/new",(req,res)=>{
+    let {username,email,password} = req.body;
+    let id = uuidv4();
+    let q = `insert into users (id,username,email,password) values ('${id}','${username}','${email}','${password}')`;
+    try{
+        connection.query(q, (err,result)=>{
+            if(err)throw err;
+            console.log("added new user");
+            res.redirect("/users");
+        });
+    }catch(err){
+        res.send("some error occured");
+        console.log(err);
+    }
+});
 
 app.listen(port, (req, res) => {
     console.log(`server is listening to port ${port}`);
