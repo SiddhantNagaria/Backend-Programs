@@ -167,6 +167,50 @@ app.post("/users/new",(req,res)=>{
     }
 });
 
+//delete route
+app.get("/users/:id/delete", (req, res) => {
+    let { id } = req.params;
+    let q = `select * from users where id='${id}'`;
+    try {
+        connection.query(q, (err, result) => {
+            if (err) throw err;
+            let user = result[0];
+            res.render("delete.ejs", { user });
+        });
+    } catch (err) {
+        res.send("some error occured");
+        console.log(err);
+    }
+});
+
+app.delete("/user/:id", (req, res) => {
+    let { id } = req.params;
+    let { password } = req.body;
+    let q = `select * from users where id='${id}'`;
+    try {
+        connection.query(q, (err, result) => {
+            if (err) throw err;
+            let user = result[0];
+            if (password != user.password) {
+                res.send("incorrect password");
+            } else {
+                let q2 = `delete from users where id='${id}'`;
+                connection.query(q2, (err, result) => {
+                    if (err) throw err;
+                    else {
+                        console.log(result);
+                        console.log("deleted");
+                        res.redirect("/users");
+                    }
+                });
+            }
+        });
+    } catch (err) {
+        res.send("some error occured");
+        console.log(err);
+    }
+});
+
 app.listen(port, (req, res) => {
     console.log(`server is listening to port ${port}`);
 });
