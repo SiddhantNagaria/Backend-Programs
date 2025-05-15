@@ -38,3 +38,22 @@ User.insertMany([
 }).catch((err) => {
     console.log(err);
 });
+
+User.find().then((res) => {
+    console.log(res);
+    // console.log(res[0].username);
+}).catch((err) => {
+    console.log(err);
+});
+
+User.findOne({ username: "abc" }).then((res) => {
+    console.log(res);
+}).catch((err) => {
+    console.log(err);
+});
+
+User.findById("6825a5d6cbed6e0da7df4a6c").then((res) => {
+    console.log(res);
+}).catch((err) => {
+    console.log(err);
+});
