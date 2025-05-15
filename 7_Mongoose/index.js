@@ -114,12 +114,13 @@ const bookSchema  = new mongoose.Schema({
     },
     price:{
         type: Number,
-        min: 50
+        min: [50, "prize is too low to sell a book"],
     },
     discount:{
         type: Number,
         default: 0
     },
+    genre: [],
     category:{
         type: String,
         enum: ['fiction', 'non-fiction', 'comics']
@@ -132,4 +133,10 @@ book1.save().then((res) => {
     console.log(res);
 }).catch((err) => {
     console.log(err);
+});
+
+Book.findByIdAndUpdate("6826249ee41300856a2f5cb0", {price:80}, {runValidators: true}).then((res)=>{
+    console.log(res);
+}).catch((err)=>{
+    console.log(err.errors);
 });
