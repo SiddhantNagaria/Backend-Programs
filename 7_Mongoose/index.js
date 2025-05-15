@@ -29,3 +29,12 @@ user2.save().then(
     (err) => {
         console.log(err);
     });
+
+User.insertMany([
+    { username: "pqr", email: "pqr@pqr", password: "pqr" },
+    { username: "lmn", email: "lmn@lmn", password: "lmn" }
+]).then((res) => {
+    console.log(res)
+}).catch((err) => {
+    console.log(err);
+});
