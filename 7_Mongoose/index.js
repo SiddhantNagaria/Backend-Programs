@@ -79,3 +79,27 @@ User.findOneAndUpdate({ username: "abc" }, { email: "abc@pqr" }, { new: true }).
 User.findByIdAndUpdate("6825a5d6cbed6e0da7df4a6c", { email: "abc@asdf" }, { new: true }).then((res) => {
     console.log(res);
 }).catch(err => console.log(err));
+
+User.deleteOne({ username: "abc" }).then((res) => {
+    console.log(res);
+}).catch((err) => {
+    console.log(err);
+});
+
+User.deleteMany({ username: ["abc", "xyz"] }).then((res) => {
+    console.log(res);
+}).catch((err) => {
+    console.log(err);
+});
+
+User.findByIdAndDelete("6825a5d6cbed6e0da7df4a6c").then((res) => {
+    console.log(res);
+}).catch((err) => {
+    console.log(err);
+});
+
+User.findOneAndDelete({ username: "abc" }).then((res) => {
+    console.log(res);
+}).catch((err) => {
+    console.log(err);
+});
