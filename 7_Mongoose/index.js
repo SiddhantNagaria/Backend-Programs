@@ -17,6 +17,15 @@ const userSchema = new mongoose.Schema({
 });
 
 const User = mongoose.model('User', userSchema); //model and collection name should be same
- //   |                        |
-  //model                 //collection
-const Employee = mongoose.model('Employee', userSchema);
+//   |                        |
+//model                 //collection
+
+const user1 = new User({ username: "abc", email: "abc@abc", password: "abc" });
+const user2 = new User({ username: "xyz", email: "xyz@xyz", password: "xyz" });
+user1.save();  //asynchronous
+user2.save().then(
+    (res) => { console.log(res) }
+).catch(
+    (err) => {
+        console.log(err);
+    });
