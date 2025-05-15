@@ -114,7 +114,15 @@ const bookSchema  = new mongoose.Schema({
     },
     price:{
         type: Number,
-        min: 0
+        min: 50
+    },
+    discount:{
+        type: Number,
+        default: 0
+    },
+    category:{
+        type: String,
+        enum: ['fiction', 'non-fiction', 'comics']
     },
 });
 
