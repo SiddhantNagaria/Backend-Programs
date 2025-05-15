@@ -57,3 +57,25 @@ User.findById("6825a5d6cbed6e0da7df4a6c").then((res) => {
 }).catch((err) => {
     console.log(err);
 });
+
+User.updateOne({ username: "abc" }, { email: "abc@xyz" }).then((res) => {
+    console.log(res);
+}).catch((err) => {
+    console.log(err);
+});
+
+User.updateMany({ username: "abc" }, { email: "abc@pqr" }).then((res) => {
+    console.log(res);
+}).catch((err) => {
+    console.log(err);
+});
+
+User.findOneAndUpdate({ username: "abc" }, { email: "abc@pqr" }, { new: true }).then((res) => {
+    console.log(res);
+}).catch((err) => {
+    console.log(err);
+});
+
+User.findByIdAndUpdate("6825a5d6cbed6e0da7df4a6c", { email: "abc@asdf" }, { new: true }).then((res) => {
+    console.log(res);
+}).catch(err => console.log(err));
