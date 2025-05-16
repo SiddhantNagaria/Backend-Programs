@@ -1,0 +1,16 @@
+bosy{
+    margin: 20px;
+}
+.chat{
+    background-color: lightblue;
+    padding: 10px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+.msg{
+    background-color: lightblue;
+    padding: 5px ;
+    border-radius: 10px;
+    margin: 5px;
+}
