@@ -11,25 +11,25 @@ async function main() {
     await mongoose.connect('mongodb://127.0.0.1:27017/whatsapp');
 }
 
-let allChats = [
-    {
-        from: "John",
-        to: "Doe",
-        msg: "Hello Doe",
-        createdAt: new Date()
-    },
-    {
-        from: "Doe",
-        to: "John",
-        msg: "Hello John",
-        createdAt: new Date()
-    },
-    {
-        from: "John",
-        to: "Doe",
-        msg: "How are you?",
-        createdAt: new Date()
-    },
-]
+// let allChats = [
+//     {
+//         from: "John",
+//         to: "Doe",
+//         msg: "Hello Doe",
+//         createdAt: new Date()
+//     },
+//     {
+//         from: "Doe",
+//         to: "John",
+//         msg: "Hello John",
+//         createdAt: new Date()
+//     },
+//     {
+//         from: "John",
+//         to: "Doe",
+//         msg: "How are you?",
+//         createdAt: new Date()
+//     },
+// ]
 
-Chat.insertMany(allChats);
+// Chat.insertMany(allChats);
