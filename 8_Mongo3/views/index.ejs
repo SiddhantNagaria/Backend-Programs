@@ -1,32 +1,33 @@
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>mini whatsapp</title>
-        <link rel="stylesheet" href="/style.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mini whatsapp</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
 
-    <body>
-        <h1>Chat Messages</h1>
-        <form action="/chats/new" method="get">
-            <button>Add New Chat</button>
-        </form>
+<body>
+    <h1>Chat Messages</h1>
+    <form action="/chats/new" method="get">
+        <button>Add New Chat</button>
+    </form>
         <br><br>
-        <% for(let chat of chats){ %>
-            <div class="chat">
-                <p>
-                    From: <%= chat.from %> <br>
-                    To: <%= chat.to %> <br>
-                    <div class="msg">
-                        Message: <%= chat.msg %> <br>
-                        <hr>
-                    </div>
-                    
-                </p>
-            </div>
-            <% } %>
-    </body>
+    <% for(let chat of chats){ %>
+        <div class="chat">
+            <p>
+                From: <%= chat.from %> <br>
+                To: <%= chat.to %> <br>
+                <div class="msg">
+                    Message: <%= chat.msg %> <br>
+                    <hr>
+                    <p><%= chat.createdAt.toString().split(" ")[4] %></p>
+                    <p><%= chat.createdAt.toString().split(" ").slice(0,4).join("-") %></p>
+                </div>
+            </p>
+        </div>
+        <% } %>
+</body>
 
-    </html>
+</html>
