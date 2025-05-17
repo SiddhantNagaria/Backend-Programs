@@ -10,6 +10,10 @@
 
     <body>
         <h1>Chat Messages</h1>
+        <form action="/chats/new" method="get">
+            <button>Add New Chat</button>
+        </form>
+        <br><br>
         <% for(let chat of chats){ %>
             <div class="chat">
                 <p>
