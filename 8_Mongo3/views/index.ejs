@@ -21,6 +21,9 @@
                 To: <%= chat.to %> <br>
                 <div class="msg">
                     Message: <%= chat.msg %> <br>
+                    <form action="/chats/<%=chat._id%>/edit">
+                        <button>edit</button>
+                    </form>
                     <hr>
                     <p><%= chat.createdAt.toString().split(" ")[4] %></p>
                     <p><%= chat.createdAt.toString().split(" ").slice(0,4).join("-") %></p>
