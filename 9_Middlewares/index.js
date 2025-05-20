@@ -60,6 +60,10 @@ app.get("/wrong", (req, res) => {
     abcd = abcd;
 })
 
+app.get("/admin", (req,res)=>{
+    throw new ExpressError(403, "admin access is forbidden");
+})
+
 
 app.use((err, req, res, next) => {
     let { status = 500, message = "Some Error OCcured" } = err;
