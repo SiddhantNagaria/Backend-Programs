@@ -24,6 +24,9 @@
                     <form action="/chats/<%=chat._id%>/edit">
                         <button>edit</button>
                     </form> <br>
+                    <form action="/chats/<%=chat._id%>" method="get">
+                        <button>show</button>
+                    </form> <br>
                     <form action="/chats/<%=chat._id%>?_method=DELETE" method="post">
                         <button onclick="return confirm('are you sure?')">delete</button>
                     </form>
