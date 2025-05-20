@@ -60,10 +60,19 @@ app.get("/wrong",(req,res)=>{
 })
 
 
-//404
-app.use((req, res) => {
-    res.status(404).send("page not found");
+app.use((err,req,res,next)=>{
+    console.log("----- Error ----");
+    next(err);
 })
+app.use((err,req,res,next)=>{
+    console.log("----- Error 2 ----");
+    next();
+})
+
+//404
+// app.use((req, res) => {
+//     res.status(404).send("page not found");
+// })
 
 
 app.listen(8080, () => {
