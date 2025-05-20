@@ -1,33 +1,34 @@
 const express = require('express');
 const app = express();
+const ExpressError = require("./ExpressError");
 
 //middleware
-app.use((req, res, next) => {
-    console.log('hi , i am first middleware');
-    return next();
-    console.log('abc');
-})
+// app.use((req, res, next) => {
+//     console.log('hi , i am first middleware');
+//     return next();
+//     console.log('abc');
+// })
 
-app.use((req, res, next) => {
-    console.log('hi , i am second middleware');
-    next();
-})
+// app.use((req, res, next) => {
+//     console.log('hi , i am second middleware');
+//     next();
+// })
 
 
 //utility middleware
-app.use((req, res, next) => {
-    req.time = new Date(Date.now()).toString();
-    console.log(req.method, req.hostname, req.path, req.time);
-    next();
-})
+// app.use((req, res, next) => {
+//     req.time = new Date(Date.now()).toString();
+//     console.log(req.method, req.hostname, req.path, req.time);
+//     next();
+// })
 
-app.get("/", (req, res) => {
-    res.send("hi i am root");
-})
+// app.get("/", (req, res) => {
+//     res.send("hi i am root");
+// })
 
-app.get("/random", (req, res) => {
-    res.send("hi, i am random page");
-})
+// app.get("/random", (req, res) => {
+//     res.send("hi, i am random page");
+// })
 
 // app.use("/api", (req, res, next) => {
 //     let { token } = req.query;
@@ -47,7 +48,7 @@ const checkToken = (req, res, next) => {
     if (token == "access") {
         next();
     }
-    throw new Error("access denied");
+    throw new ExpressError(401,"access denied");
 };
 app.get("/api", checkToken, (req, res) => {
     res.send("data");
@@ -62,12 +63,13 @@ app.get("/wrong",(req,res)=>{
 
 app.use((err,req,res,next)=>{
     console.log("----- Error ----");
-    next(err);
+    res.send(err);
 })
-app.use((err,req,res,next)=>{
-    console.log("----- Error 2 ----");
-    next();
-})
+
+// app.use((err,req,res,next)=>{
+//     console.log("----- Error 2 ----");
+//     next(err);
+// })
 
 //404
 // app.use((req, res) => {
