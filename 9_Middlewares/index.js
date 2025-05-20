@@ -2,25 +2,25 @@ const express = require('express');
 const app = express();
 
 //middleware
-app.use((req,res)=>{
-    // console.log("path", req.path);
-    if (req.path === '/favicon.ico') {
-        return res.status(204).end(); // No Content
-    }
-    let {query} = req.query;
-    console.log(query);
-    console.log('hi , i am a middleware');
-    res.send("middleware finished");
+app.use((req, res, next) => {
+    console.log('hi , i am first middleware');
+    return next();
+    console.log('abc');
 })
 
-app.get("/", (req,res)=>{
+app.use((req, res, next) => {
+    console.log('hi , i am second middleware');
+    next();
+})
+
+app.get("/", (req, res) => {
     res.send("hi i am root");
 })
 
-app.get("/random", (req,res)=>{
-    res.send("hi, i am random page")
+app.get("/random", (req, res) => {
+    res.send("hi, i am random page");
 })
 
-app.listen(8080, ()=>{
+app.listen(8080, () => {
     console.log('server running on port 8080');
 })
