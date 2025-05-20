@@ -47,10 +47,16 @@ const checkToken = (req, res, next) => {
     if (token == "access") {
         next();
     }
-    res.send("access denied");
+    throw new Error("access denied");
 };
 app.get("/api", checkToken, (req, res) => {
     res.send("data");
+})
+
+
+//error handling
+app.get("/wrong",(req,res)=>{
+    abcd=abcd;
 })
 
 
