@@ -48,7 +48,7 @@ const checkToken = (req, res, next) => {
     if (token == "access") {
         next();
     }
-    throw new ExpressError(401,"access denied");
+    throw new ExpressError(401, "access denied");
 };
 app.get("/api", checkToken, (req, res) => {
     res.send("data");
@@ -56,14 +56,15 @@ app.get("/api", checkToken, (req, res) => {
 
 
 //error handling
-app.get("/wrong",(req,res)=>{
-    abcd=abcd;
+app.get("/wrong", (req, res) => {
+    abcd = abcd;
 })
 
 
-app.use((err,req,res,next)=>{
-    console.log("----- Error ----");
-    res.send(err);
+app.use((err, req, res, next) => {
+    let { status = 500, message = "Some Error OCcured" } = err;
+    // console.log("----- Error ----");
+    res.status(status).send(message);
 })
 
 // app.use((err,req,res,next)=>{
