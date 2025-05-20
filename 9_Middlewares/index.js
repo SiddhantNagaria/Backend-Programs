@@ -29,14 +29,27 @@ app.get("/random", (req, res) => {
     res.send("hi, i am random page");
 })
 
-app.use("/api", (req, res, next) => {
+// app.use("/api", (req, res, next) => {
+//     let { token } = req.query;
+//     if (token == "access") {
+//         next();
+//     }
+//     res.send("access denied");
+// })
+// app.get("/api", (req, res) => {
+//     res.send("data");
+// })
+
+
+//multiple middleware passing in one
+const checkToken = (req, res, next) => {
     let { token } = req.query;
     if (token == "access") {
         next();
     }
     res.send("access denied");
-})
-app.get("/api", (req, res) => {
+};
+app.get("/api", checkToken, (req, res) => {
     res.send("data");
 })
 
@@ -45,6 +58,7 @@ app.get("/api", (req, res) => {
 app.use((req, res) => {
     res.status(404).send("page not found");
 })
+
 
 app.listen(8080, () => {
     console.log('server running on port 8080');
