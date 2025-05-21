@@ -111,6 +111,21 @@ app.get("/", (req, res) => {
 });
 
 
+const handleValidationError=(err)=>{
+    console.log('this was a validation error. Please follow rules');
+    console.dir(err.message);
+    return err;
+}
+
+app.use((err,req,res,next)=>{
+    console.log(err.name);
+     if(err.name =="ValidationError"){
+        err=handleValidationError(err);
+     }
+    next(err);
+})
+
+
 //Error Handler Middleware
 app.use((err, req, res, next) => {
     let { status = 500, message = "some error occured" } = err;
