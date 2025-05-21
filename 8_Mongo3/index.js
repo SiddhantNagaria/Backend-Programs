@@ -39,20 +39,20 @@ app.get('/chats/new', (req, res) => {
 
 
 //create route
-app.post('/chats', (req, res) => {
-    const { from, msg, to } = req.body;
-    let newChat = new Chat({
-        from: from,
-        msg: msg,
-        to: to,
-        createdAt: new Date()
-    });
-    newChat.save().then((res) => {
-        console.log('Chat saved successfully');
-    }).catch((err) => {
-        console.log('Error saving chat', err);
-    });
-    res.redirect('/chats');
+app.post('/chats', async (req, res, next) => {
+    try {
+        let { from, msg, to } = req.body;
+        let newChat = new Chat({
+            from: from,
+            msg: msg,
+            to: to,
+            createdAt: new Date()
+        });
+        await newChat.save();
+        res.redirect('/chats');
+    } catch (err) {
+        next(err);
+    }
 });
 
 
@@ -67,21 +67,29 @@ app.get("/chats/:id", async (req, res, next) => {
 })
 
 //edit route
-app.get('/chats/:id/edit', async (req, res) => {
-    let { id } = req.params;
-    let chat = await Chat.findById(id);
-    res.render('edit.ejs', { chat });
+app.get('/chats/:id/edit', async (req, res, next) => {
+    try {
+        let { id } = req.params;
+        let chat = await Chat.findById(id);
+        res.render('edit.ejs', { chat });
+    } catch (err) {
+        next(err);
+    }
 })
 
 
 //update route
-app.put('/chats/:id', async (req, res) => {
-    let { id } = req.params;
-    let { msg: newMsg } = req.body;
-    let updatedChat = await Chat.findByIdAndUpdate(id, { msg: newMsg },
-        { runValidators: true, new: true });
-    console.log(updatedChat);
-    res.redirect('/chats');
+app.put('/chats/:id', async (req, res, next) => {
+    try {
+        let { id } = req.params;
+        let { msg: newMsg } = req.body;
+        let updatedChat = await Chat.findByIdAndUpdate(id, { msg: newMsg },
+            { runValidators: true, new: true });
+        console.log(updatedChat);
+        res.redirect('/chats');
+    } catch (err) {
+        next(err);
+    }
 })
 
 
