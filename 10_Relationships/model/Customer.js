@@ -47,6 +47,13 @@ const addCustomer = async () => {
 
 addCustomer();
 
+const find = async()=>{
+    let res = await Customer.findOne({name:"Siddhant Nagaria"}).populate("orders");
+    console.log(res);
+} 
+
+find();
+
 // const addOrders = async () => {
 //     let res = await Order.insertMany([
 //         {
